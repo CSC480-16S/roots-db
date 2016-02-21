@@ -1,0 +1,84 @@
+DROP DATABASE IF EXISTS roots;
+CREATE DATABASE roots;
+USE roots;
+
+CREATE TABLE Individual(
+   id INT NOT NULL AUTO_INCREMENT,
+   date_of_birth DATE,
+   municipality_of_birth VARCHAR(64),
+   state_of_birth VARCHAR(64),
+   country_of_birth VARCHAR(64),
+   date_of_death DATE,
+   municipality_of_death VARCHAR(64),
+   state_of_death VARCHAR(64),
+   country_of_death VARCHAR(64),
+   gender VARCHAR(64),
+   bio VARCHAR(256),
+   economic_status VARCHAR(64),
+   immigration_history VARCHAR(64),
+   accomplishments VARCHAR(256),
+   notes VARCHAR(256),
+   PRIMARY KEY(id)
+);
+
+CREATE TABLE Name(
+   id INT NOT NULL AUTO_INCREMENT,
+   individual_id INT NOT NULL,
+   first_name VARCHAR(256) NOT NULL,
+   middle_name VARCHAR(256),
+   last_name VARCHAR(256) NOT NULL,
+   suffix VARCHAR(256),
+   reason_for_change VARCHAR(256),
+   date_from DATE,
+   date_to DATE,
+   notes VARCHAR(256),
+   PRIMARY KEY(id),
+   FOREIGN KEY(individual_id) REFERENCES Individual(id)
+);
+
+CREATE TABLE Occupation(
+   id INT NOT NULL AUTO_INCREMENT,
+   individual_id INT NOT NULL,
+   occupation VARCHAR(256) NOT NULL,
+   occupation_start DATE,
+   occupation_end DATE,
+   employer VARCHAR(256),
+   country VARCHAR(256),
+   state VARCHAR(256),
+   municipality VARCHAR(256),
+   notes VARCHAR(256),
+   PRIMARY KEY(id),
+   FOREIGN KEY(individual_id) REFERENCES Individual(id)
+);
+
+CREATE TABLE Parent_of(
+   id INT NOT NULL AUTO_INCREMENT,
+   parent_id INT NOT NULL,
+   child_id INT NOT NULL,
+   notes VARCHAR(256),
+   PRIMARY KEY(id),
+   FOREIGN KEY(parent_id) REFERENCES Individual(id),
+   FOREIGN KEY(child_id) REFERENCES Individual(id)
+);
+
+CREATE TABLE Married_to(
+   id INT NOT NULL AUTO_INCREMENT,
+   spouse_1_id INT NOT NULL,
+   spouse_2_id INT,
+   marriage_date DATE NOT NULL,
+   marriage_end_date DATE,
+   reason_for_end VARCHAR(256),
+   notes VARCHAR(256),
+   PRIMARY KEY(id),
+   FOREIGN KEY(spouse_1_id) REFERENCES Individual(id),
+   FOREIGN KEY(spouse_2_id) REFERENCES Individual(id)
+);
+
+CREATE TABLE User(
+   email VARCHAR(100) NOT NULL,
+   password VARCHAR(32) NOT NULL,
+   email_verified BOOLEAN DEFAULT false,
+   individual_id INT,
+   PRIMARY KEY(email),
+   FOREIGN KEY(individual_id) REFERENCES Individual(id)
+);
