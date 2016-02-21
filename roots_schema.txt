@@ -1,7 +1,3 @@
-DROP DATABASE IF EXISTS roots;
-CREATE DATABASE roots;
-USE roots;
-
 CREATE TABLE Individual(
    id INT NOT NULL AUTO_INCREMENT,
    date_of_birth DATE,
