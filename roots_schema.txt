@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS rootsDB;
+CREATE DATABASE rootsDB;
+USE rootsDB;
+
 CREATE TABLE Individual(
    id INT NOT NULL AUTO_INCREMENT,
    date_of_birth DATE,
@@ -9,11 +13,7 @@ CREATE TABLE Individual(
    state_of_death VARCHAR(64),
    country_of_death VARCHAR(64),
    gender VARCHAR(64),
-   bio VARCHAR(256),
-   economic_status VARCHAR(64),
-   immigration_history VARCHAR(64),
-   accomplishments VARCHAR(256),
-   notes VARCHAR(256),
+   bio VARCHAR(5000),
    PRIMARY KEY(id)
 );
 
@@ -27,7 +27,6 @@ CREATE TABLE Name(
    reason_for_change VARCHAR(256),
    date_from DATE,
    date_to DATE,
-   notes VARCHAR(256),
    PRIMARY KEY(id),
    FOREIGN KEY(individual_id) REFERENCES Individual(id)
 );
@@ -42,7 +41,6 @@ CREATE TABLE Occupation(
    country VARCHAR(256),
    state VARCHAR(256),
    municipality VARCHAR(256),
-   notes VARCHAR(256),
    PRIMARY KEY(id),
    FOREIGN KEY(individual_id) REFERENCES Individual(id)
 );
@@ -51,7 +49,6 @@ CREATE TABLE Parent_of(
    id INT NOT NULL AUTO_INCREMENT,
    parent_id INT NOT NULL,
    child_id INT NOT NULL,
-   notes VARCHAR(256),
    PRIMARY KEY(id),
    FOREIGN KEY(parent_id) REFERENCES Individual(id),
    FOREIGN KEY(child_id) REFERENCES Individual(id)
@@ -64,7 +61,6 @@ CREATE TABLE Married_to(
    marriage_date DATE NOT NULL,
    marriage_end_date DATE,
    reason_for_end VARCHAR(256),
-   notes VARCHAR(256),
    PRIMARY KEY(id),
    FOREIGN KEY(spouse_1_id) REFERENCES Individual(id),
    FOREIGN KEY(spouse_2_id) REFERENCES Individual(id)
