@@ -428,16 +428,19 @@ public class GedHandler extends DefaultHandler implements GedConstants {
                current.names.add(currentName);
                currentName = null;
             }
+            break;
          case OCCUPATION:
             if(currentOccupation != null) {
                current.occupations.add(currentOccupation);
                currentOccupation = null;
             }
+            break;
          case FAMILY:
             if(currentMarriage != null) {
                marriages.add(currentMarriage);
                currentMarriage = null;
             }
+            break;
       }
    }
 
