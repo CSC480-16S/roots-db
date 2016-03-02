@@ -1,7 +1,3 @@
-DROP DATABASE IF EXISTS rootsDB;
-CREATE DATABASE rootsDB;
-USE rootsDB;
-
 /**
  * Profile of an Individual in the database.
  * id                      Unique identifier of the Individual
