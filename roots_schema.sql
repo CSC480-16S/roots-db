@@ -19,11 +19,11 @@ USE rootsDB;
 CREATE TABLE Individual(
    id INT NOT NULL AUTO_INCREMENT,
    date_of_birth DATE,
-   municipality_of_birth VARCHAR(64),
+   municipality_of_birth VARCHAR(128),
    state_of_birth VARCHAR(64),
    country_of_birth VARCHAR(64),
    date_of_death DATE,
-   municipality_of_death VARCHAR(64),
+   municipality_of_death VARCHAR(128),
    state_of_death VARCHAR(64),
    country_of_death VARCHAR(64),
    gender VARCHAR(64),
