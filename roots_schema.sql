@@ -124,6 +124,9 @@ CREATE TABLE Married_to(
  * email_confirm     Email confirmation code. Once email is confirmed, this is NULL; a NULL value
  *                   indicates a confirmed email
  * individual_id     The id of the user's Individual profile in the genealogical database
+ * login_count       Counter used to track attempts to log into an account within a cooldown period
+ * timestamp         Timestamp of user's last login
+ * cooldown          Login cooldown timestamp
  */
 CREATE TABLE User(
    email VARCHAR(100) NOT NULL,
@@ -131,6 +134,9 @@ CREATE TABLE User(
    password_reset VARCHAR(32),
    email_confirm VARCHAR(32),
    individual_id INT,
+   login_count INT,
+   timestamp BIGINT,
+   cooldown BIGINT,
    PRIMARY KEY(email),
    FOREIGN KEY(individual_id) REFERENCES Individual(id)
 );
