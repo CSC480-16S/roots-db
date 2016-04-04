@@ -24,6 +24,7 @@ CREATE TABLE Individual(
    country_of_death VARCHAR(64),
    gender VARCHAR(64),
    bio VARCHAR(5000),
+   image INTEGER,
    PRIMARY KEY(id)
 );
 
