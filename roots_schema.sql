@@ -11,6 +11,7 @@
  * country_of_death        The country where the Indvidual died
  * gender                  The Indvidual's gender
  * bio                     Biographical notes on the Indvidual
+ * image                   Reference number to an image
  */
 CREATE TABLE Individual(
    id INT NOT NULL AUTO_INCREMENT,
@@ -26,6 +27,20 @@ CREATE TABLE Individual(
    bio VARCHAR(5000),
    image INTEGER,
    PRIMARY KEY(id)
+);
+
+/**
+ * Image associated with an Individual.
+ * id             Unique identifier of the Individual
+ * individual_id  The Individual id of the person with the Name
+ * url            URL of the image
+ */
+CREATE TABLE Image(
+   id INT NOT NULL AUTO_INCREMENT,
+   individual_id INT NOT NULL,
+   url TEXT   
+   PRIMARY KEY(id),
+   FOREIGN KEY(individual_id) REFERENCES Individual(id)
 );
 
 /**
@@ -64,7 +79,7 @@ CREATE TABLE Name(
  * employer          Employer
  * country           Country of employment
  * state             State of employment
- * Municipality      municipality of employment
+ * municipality      municipality of employment
  */
 CREATE TABLE Occupation(
    id INT NOT NULL AUTO_INCREMENT,
@@ -119,25 +134,42 @@ CREATE TABLE Married_to(
 /**
  * Profile of a user of the site for administrative purposes, distinct from a person's profile
  * within the genealogical data.
- * email             User's email address is their unique identifier
- * password          Hashed value of the user's password
- * password_reset    Password reset code
- * email_confirm     Email confirmation code. Once email is confirmed, this is NULL; a NULL value
- *                   indicates a confirmed email
- * individual_id     The id of the user's Individual profile in the genealogical database
- * login_count       Counter used to track attempts to log into an account within a cooldown period
- * timestamp         Timestamp of user's last login
- * cooldown          Login cooldown timestamp
+ * email                User's email address is their unique identifier
+ * password             Hashed value of the user's password
+ * individual_id        The id of the user's Individual profile in the genealogical database
+ * email_confirm_code   Email confirmation code. Once email is confirmed, this is NULL; a NULL value
+ *                      indicates a confirmed email
+ * password_reset       Password reset code
+ * email_confirm        ???
+ * login_count          Counter used to track attempts to log into an account within a cooldown period
+ * timestamp            Timestamp of user's last login
+ * cooldown             Login cooldown timestamp
  */
 CREATE TABLE User(
    email VARCHAR(100) NOT NULL,
    password VARCHAR(32) NOT NULL,
-   password_reset VARCHAR(32),
-   email_confirm VARCHAR(32),
    individual_id INT,
+   email_confirm_code VARCHAR(32),
+   password_reset VARCHAR(32),
+   email_confirm BOOLEAN,
    login_count INT,
    timestamp BIGINT,
    cooldown BIGINT,
    PRIMARY KEY(email),
    FOREIGN KEY(individual_id) REFERENCES Individual(id)
+);
+
+/**
+ * Sibling relationship between two Individuals.
+ * id             Unique identifier of the Sibling relationship
+ * sibling_1_id   The first sibling's individual id
+ * sibling_2_id   The first second's individual id
+ */
+CREATE TABLE Sibling_to(
+   id INT NOT NULL AUTO_INCREMENT,
+   spouse_1_id INT NOT NULL,
+   spouse_2_id INT NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(sibling_1_id) REFERENCES Individual(id),
+   FOREIGN KEY(sibling_2_id) REFERENCES Individual(id)
 );
