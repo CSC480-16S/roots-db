@@ -173,3 +173,21 @@ CREATE TABLE Sibling_to(
    FOREIGN KEY(sibling_1_id) REFERENCES Individual(id),
    FOREIGN KEY(sibling_2_id) REFERENCES Individual(id)
 );
+
+/**
+ * Mapping of countries that no longer exist to their modern-day counterparts.
+ * id                Unique identifier of the Individual
+ * name              Name of the former country
+ * from              Beginning date of the former country
+ * to                End date of the former country
+ * modern_location   Modern-day country occupying the same geographical location
+ *                   as the former country
+ */
+CREATE TABLE Former_countries(
+   id INT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(64) NOT NULL,
+   from DATE NOT NULL,
+   to DATE NOT NULL,
+   modern_location VARCHAR(64) NOT NULL,
+   PRIMARY KEY(id)
+);
