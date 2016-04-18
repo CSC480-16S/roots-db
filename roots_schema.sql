@@ -12,6 +12,8 @@
  * gender                  The Indvidual's gender
  * bio                     Biographical notes on the Indvidual
  * image                   Reference number to an image
+ * created_at              Timestamp for profile creation
+ * private                 Flag indicating Individual's data is private
  */
 CREATE TABLE Individual(
    id INT NOT NULL AUTO_INCREMENT,
@@ -26,6 +28,8 @@ CREATE TABLE Individual(
    gender VARCHAR(64),
    bio VARCHAR(5000),
    image INTEGER,
+   create_at BIGINT,
+   private BOOLEAN,
    PRIMARY KEY(id)
 );
 
@@ -144,6 +148,7 @@ CREATE TABLE Married_to(
  * login_count          Counter used to track attempts to log into an account within a cooldown period
  * timestamp            Timestamp of user's last login
  * cooldown             Login cooldown timestamp
+ * profile_complete     Flag for completed user profile
  */
 CREATE TABLE User(
    email VARCHAR(100) NOT NULL,
@@ -155,6 +160,7 @@ CREATE TABLE User(
    login_count INT,
    timestamp BIGINT,
    cooldown BIGINT,
+   profile_complete BOOLEAN,
    PRIMARY KEY(email),
    FOREIGN KEY(individual_id) REFERENCES Individual(id)
 );
