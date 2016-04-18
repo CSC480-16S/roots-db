@@ -186,8 +186,8 @@ CREATE TABLE Sibling_to(
 CREATE TABLE Former_countries(
    id INT NOT NULL AUTO_INCREMENT,
    name VARCHAR(64) NOT NULL,
-   from DATE NOT NULL,
-   to DATE NOT NULL,
+   date_from DATE NOT NULL,
+   date_to DATE NOT NULL,
    modern_location VARCHAR(64) NOT NULL,
    PRIMARY KEY(id)
 );
